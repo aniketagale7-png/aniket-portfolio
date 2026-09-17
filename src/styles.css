@@ -1,3 +1,182 @@
-/* You can add global styles to this file, and also import other style files */
-
+/* Global styles with Tailwind CSS v4 */
 @import 'tailwindcss';
+@import 'aos/dist/aos.css';
+
+/* --- HIGH-CONTRAST DARK & LIGHT MODE VARIABLES --- */
+:root {
+  --bg-primary: #030712;
+  --bg-secondary: #0f172a;
+  --bg-surface: #1e293b;
+  --bg-card: rgba(15, 23, 42, 0.95);
+  --bg-nav: rgba(3, 7, 18, 0.85);
+
+  --text-primary: #ffffff;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+
+  --border-color: rgba(255, 255, 255, 0.12);
+  --border-active: rgba(6, 182, 212, 0.5);
+
+  --primary: #06b6d4;      /* Cyan */
+  --secondary: #6366f1;    /* Indigo */
+  --accent: #a855f7;       /* Purple */
+
+  --gradient-hero: linear-gradient(135deg, #06b6d4 0%, #6366f1 50%, #a855f7 100%);
+  --gradient-btn: linear-gradient(90deg, #4f46e5 0%, #06b6d4 100%);
+  --glow-color: rgba(6, 182, 212, 0.25);
+  --shadow-card: 0 20px 40px -15px rgba(6, 182, 212, 0.15);
+}
+
+/* Global smooth transitions */
+body, section, header, footer, div, button, a, input, textarea {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* --- DARK MODE (High Contrast White Text over Deep Midnight) --- */
+[data-mode="dark"],
+:root:not([data-mode]) {
+  --bg-primary: #030712;
+  --bg-secondary: #0f172a;
+  --bg-surface: #1e293b;
+  --bg-card: rgba(15, 23, 42, 0.95);
+  --bg-nav: rgba(3, 7, 18, 0.85);
+
+  --text-primary: #ffffff;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+
+  --border-color: rgba(255, 255, 255, 0.12);
+  --border-active: rgba(6, 182, 212, 0.5);
+
+  --primary: #06b6d4;
+  --secondary: #6366f1;
+  --accent: #a855f7;
+
+  --gradient-hero: linear-gradient(135deg, #38bdf8, #818cf8, #c084fc);
+  --gradient-btn: linear-gradient(90deg, #4f46e5, #0284c7);
+  --glow-color: rgba(6, 182, 212, 0.25);
+  --shadow-card: 0 20px 40px -15px rgba(6, 182, 212, 0.2);
+}
+
+/* --- LIGHT MODE (Clean White Canvas + Deep Charcoal Text for 100% Visibility) --- */
+[data-mode="light"] {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-surface: #f1f5f9;
+  --bg-card: #ffffff;
+  --bg-nav: rgba(255, 255, 255, 0.92);
+
+  --text-primary: #0f172a;    /* Deep slate-900 text */
+  --text-secondary: #334155;  /* Slate-700 readable body text */
+  --text-muted: #64748b;     /* Slate-500 subtext */
+
+  --border-color: #cbd5e1;    /* Clean visible slate border */
+  --border-active: #0284c7;   /* Vibrant Sky Blue active border */
+
+  --primary: #0284c7;
+  --secondary: #4f46e5;
+  --accent: #7c3aed;
+
+  --gradient-hero: linear-gradient(135deg, #0284c7, #4f46e5, #7c3aed);
+  --gradient-btn: linear-gradient(90deg, #1d4ed8, #0284c7);
+  --glow-color: rgba(2, 132, 199, 0.15);
+  --shadow-card: 0 10px 30px -10px rgba(15, 23, 42, 0.1);
+}
+
+/* --- GRADIENT & TEXT UTILITY HELPERS --- */
+.gradient-btn {
+  background-image: var(--gradient-btn) !important;
+}
+
+.gradient-hero {
+  background-image: var(--gradient-hero) !important;
+}
+
+.text-gradient {
+  background-image: var(--gradient-hero) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+}
+
+/* Keyframe animations */
+@layer utilities {
+  @keyframes float-slow {
+    0%, 100% {
+      transform: translateY(0px) scale(1);
+    }
+    50% {
+      transform: translateY(-10px) scale(1.02);
+    }
+  }
+
+  @keyframes float-delayed {
+    0%, 100% {
+      transform: translateY(0px) scale(1);
+    }
+    50% {
+      transform: translateY(10px) scale(1.02);
+    }
+  }
+
+  @keyframes spin-in-place {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .animate-float-1 {
+    animation: float-slow 4s ease-in-out infinite;
+  }
+
+  .animate-float-2 {
+    animation: float-delayed 4.8s ease-in-out infinite 0.8s;
+  }
+
+  .animate-float-3 {
+    animation: float-slow 5.2s ease-in-out infinite 1.6s;
+  }
+
+  .animate-float-4 {
+    animation: float-delayed 4.4s ease-in-out infinite 2.2s;
+  }
+
+  .animate-float-5 {
+    animation: float-slow 5.8s ease-in-out infinite 1.2s;
+  }
+
+  .animate-orbit-spin {
+    animation: spin-in-place 35s linear infinite;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* --- CUSTOM CIRCLE CURSOR GLOBAL STYLING --- */
+@media (pointer: fine) {
+  html, body {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='%2306b6d4' fill-opacity='0.35' stroke='%2306b6d4' stroke-width='1.5'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%23ffffff'/%3E%3C/svg%3E") 8 8, auto;
+  }
+
+  a, button, input, textarea, select, [role="button"], .clickable, .hover-lift {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='9' fill='%23a855f7' fill-opacity='0.4' stroke='%23a855f7' stroke-width='2'/%3E%3Ccircle cx='12' cy='12' r='3' fill='%23ffffff'/%3E%3C/svg%3E") 12 12, pointer !important;
+  }
+}
+

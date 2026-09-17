@@ -1,0 +1,73 @@
+<div class="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] font-sans antialiased selection:bg-[var(--primary)] selection:text-slate-950 relative overflow-hidden">
+  
+  <app-custom-cursor></app-custom-cursor>
+
+  <div class="fixed inset-0 pointer-events-none z-0">
+    <div class="absolute inset-0 opacity-[0.06] bg-[radial-gradient(var(--primary)_1px,transparent_1px)] [background-size:24px_24px]"></div>
+    
+    <div class="absolute -top-40 -left-40 w-[600px] h-[600px] bg-[var(--primary)] opacity-10 rounded-full blur-[150px] animate-pulseGlow"></div>
+    <div class="absolute top-1/3 -right-40 w-[550px] h-[550px] bg-[var(--secondary)] opacity-10 rounded-full blur-[150px] animate-pulseGlow"></div>
+    <div class="absolute top-2/3 -left-40 w-[500px] h-[500px] bg-[var(--accent)] opacity-10 rounded-full blur-[140px] animate-pulseGlow"></div>
+    <div class="absolute -bottom-40 right-1/4 w-[600px] h-[600px] bg-[var(--primary)] opacity-10 rounded-full blur-[160px] animate-pulseGlow"></div>
+  </div>
+
+  <app-portfolio-navbar
+    [navItems]="data.navItems"
+    [personal]="data.personal"
+    [activeSection]="activeSection"
+    (navigate)="scrollTo($event)"
+  ></app-portfolio-navbar>
+
+  <main class="relative z-10">
+    <app-portfolio-hero
+      [personal]="data.personal"
+      (navigate)="scrollTo($event)"
+    ></app-portfolio-hero>
+
+    <app-portfolio-about
+      [personal]="data.personal"
+    ></app-portfolio-about>
+
+    <app-portfolio-skills
+      [skills]="data.skills"
+    ></app-portfolio-skills>
+
+    <app-portfolio-tech-marquee></app-portfolio-tech-marquee>
+
+    <app-portfolio-experience
+      [experiences]="data.experiences"
+    ></app-portfolio-experience>
+
+
+
+    <app-portfolio-projects
+      [projects]="data.projects"
+    ></app-portfolio-projects>
+
+    <app-portfolio-education
+      [education]="data.education"
+    ></app-portfolio-education>
+
+    <app-portfolio-contact
+      [personal]="data.personal"
+    ></app-portfolio-contact>
+  </main>
+
+  <app-portfolio-footer
+    [navItems]="data.navItems"
+    [personal]="data.personal"
+    (navigate)="scrollTo($event)"
+  ></app-portfolio-footer>
+
+  @if (showBackToTop()) {
+    <button
+      (click)="scrollTo('hero')"
+      class="fixed bottom-6 right-6 z-40 p-3.5 rounded-full bg-[var(--gradient-btn)] text-white shadow-2xl shadow-[var(--glow-color)] hover:scale-110 active:scale-95 transition-all cursor-pointer border border-white/20 backdrop-blur-md"
+      aria-label="Scroll back to top"
+    >
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+      </svg>
+    </button>
+  }
+</div>

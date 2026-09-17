@@ -1,0 +1,13 @@
+<div 
+  class="custom-cursor-wrapper"
+  [class.is-visible]="isVisible()"
+  [class.is-hovered]="isHovered()"
+  [class.is-clicked]="isClicked()"
+  aria-hidden="true"
+>
+  <div id="custom-cursor-ring" class="cursor-ring">
+    <div class="cursor-ring-inner"></div>
+  </div>
+
+  <div id="custom-cursor-dot" class="cursor-dot"></div>
+</div>
